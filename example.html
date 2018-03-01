@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="indeed.js"></script>
+    <style>
+      div.row{
+        width:100%;
+      }
+      div.item {
+        float:left;
+        margin:3px;
+      }
+    </style>
+    <script type="text/javascript">
+        var indeed_client = new Indeed("6814933489326501");
+        indeed_client.search({
+            q: 'company:ESPN',
+            l: 'new york, NY',
+            userip: '1.2.3.4',
+            limit: 50,
+            useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)',
+        }, function(search_response){
+            var body = document.querySelector('body');
+            search_response.results.forEach(function(result){
+              var d = document.createElement('div');
+              d.className = 'row';
+              body.appendChild(d);
+              for(var prop in result){
+                var e = document.createElement('div');
+                e.className = 'item';
+                e.innerHTML = prop +" :  "+ result[prop];
+                body.appendChild(e);
+              }
+            });
+            console.log(search_response);
+        });
+    </script>
+</head>
+<body></body>
+</html>
